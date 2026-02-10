@@ -3,113 +3,147 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width,initial-scale=1" />
-		<title>Babson Student — Portfolio</title>
-		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-		<link rel="stylesheet" href="styles.css">
+		<title>Galaxy Journey — Portfolio</title>
 	</head>
 	<body>
-		<header class="site-header">
-			<div class="container header-inner">
-				<div class="brand">
-					<h1 id="site-name">Babson Student</h1>
-					<p class="subtitle">Undergraduate at Babson College</p>
-				</div>
-				<nav class="nav">
-					<a href="#about">About</a>
-					<a href="#projects">Projects</a>
-					<a href="#contact">Contact</a>
-				</nav>
-			</div>
+		<header>
+			<h1 id="site-name">Galaxy Traveler</h1>
+			<p>Embark on a short journey through a starry galaxy.</p>
 		</header>
 
-		<main class="container">
-			<section class="hero">
-				<div class="hero-card">
-					<div class="avatar">BS</div>
-					<div>
-						<h2 id="greeting">Hello — welcome!</h2>
-						<p class="lead">I'm a Babson College student focused on entrepreneurship, product, and design. This site is a simple, professional portfolio you can customize.</p>
-						<div class="actions">
-							<a class="btn" href="#projects">See Projects</a>
-							<a class="btn btn-outline" href="#contact">Contact</a>
-						</div>
-					</div>
-				</div>
+		<main>
+			<!-- Large SVG starfield — purely SVG, no CSS used -->
+			<section>
+				<svg viewBox="0 0 1200 600" width="100%" height="400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Animated starfield">
+					<defs>
+						<radialGradient id="spaceGrad" cx="50%" cy="40%">
+							<stop offset="0%" stop-color="#001022" />
+							<stop offset="60%" stop-color="#000018" />
+							<stop offset="100%" stop-color="#000000" />
+						</radialGradient>
+						<g id="smallStars">
+							<!-- a few small stars, duplicated via <use> -->
+							<circle cx="2" cy="2" r="1" fill="#ffffff" opacity="0.9" />
+							<circle cx="6" cy="6" r="0.8" fill="#ffe9ff" opacity="0.8" />
+						</g>
+					</defs>
 
-				<div class="personalize">
-					<label for="name-input">Personalize greeting:</label>
-					<input id="name-input" placeholder="Enter your name (e.g. Jane Doe)" />
-					<button id="save-name" class="btn small">Save</button>
-					<button id="clear-name" class="btn small btn-outline">Clear</button>
-				</div>
+					<!-- Background rectangle using the radial gradient -->
+					<rect width="100%" height="100%" fill="url(#spaceGrad)" />
+
+					<!-- Layered drifting star groups (parallax effect via SVG animation) -->
+					<g id="layer1" transform="translate(0,0)">
+						<use href="#smallStars" x="50" y="40" />
+						<use href="#smallStars" x="200" y="80" />
+						<use href="#smallStars" x="400" y="20" />
+						<use href="#smallStars" x="700" y="120" />
+						<use href="#smallStars" x="980" y="60" />
+						<animateTransform attributeName="transform" type="translate" from="0 0" to="-200 0" dur="40s" repeatCount="indefinite" />
+					</g>
+
+					<g id="layer2" transform="translate(0,0)">
+						<circle cx="120" cy="300" r="1.4" fill="#fffefd" opacity="0.95" />
+						<circle cx="260" cy="220" r="1.2" fill="#fff1ff" opacity="0.9" />
+						<circle cx="420" cy="360" r="1.6" fill="#fff" opacity="1" />
+						<circle cx="600" cy="180" r="1.1" fill="#ffe" opacity="0.85" />
+						<animateTransform attributeName="transform" type="translate" from="0 0" to="200 0" dur="60s" repeatCount="indefinite" />
+					</g>
+
+					<!-- A simple swirling galaxy created with paths and rotation animation -->
+					<g transform="translate(600,300)">
+						<g id="galaxy">
+							<path d="M0,-60 C30,-50 60,-30 70,0 C60,30 30,50 0,60 C-30,50 -60,30 -70,0 C-60,-30 -30,-50 0,-60 Z" fill="none" stroke="#aabfff" stroke-width="0.8" opacity="0.85" />
+							<circle cx="0" cy="0" r="4" fill="#fff7d6" />
+						</g>
+						<animateTransform xlink:href="#galaxy" attributeName="transform" type="rotate" from="0" to="360" dur="45s" repeatCount="indefinite" />
+					</g>
+
+					<!-- Twinkling bright stars using opacity animation -->
+					<circle cx="300" cy="90" r="2.6" fill="#fff" >
+						<animate attributeName="opacity" values="0.2;1;0.2" dur="4s" repeatCount="indefinite" />
+					</circle>
+					<circle cx="900" cy="250" r="3" fill="#fff8e6" >
+						<animate attributeName="opacity" values="0.1;1;0.1" dur="6s" repeatCount="indefinite" />
+					</circle>
+				</svg>
+			</section>
+
+			<!-- Hero / Journey text -->
+			<section>
+				<h2 id="greeting">Hello — welcome!</h2>
+				<p>Imagine you're launching from a small blue planet and drifting outward through lanes of stars. This site is meant to feel like a short passage through a galaxy: distant lights, a slow swirl, and places to explore.</p>
 			</section>
 
 			<section id="about">
-				<h3>About</h3>
-				<p>A motivated Babson student with interest in startup strategy, product management, and UX. Replace this text with your summary, coursework, or recent accolades.</p>
+				<h3>About the Journey</h3>
+				<p>Use this page as a portfolio or narrative. The starfield above is an SVG image included directly in the page — no external stylesheets are used so the content remains plain HTML with embedded SVG artwork.</p>
+			</section>
+
+			<section id="gallery">
+				<h3>Star Gallery</h3>
+				<p>Below is a still 'picture' of stars (SVG snapshot). You can replace or expand this with your own images if you like.</p>
+				<figure>
+					<!-- A static star picture created from SVG copied into an <img> via data URI would be possible, but keeping SVG in the document keeps it self-contained. -->
+					<svg viewBox="0 0 600 200" width="100%" height="150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Static star picture">
+						<rect width="100%" height="100%" fill="#000013" />
+						<circle cx="30" cy="40" r="1.6" fill="#fff" />
+						<circle cx="120" cy="80" r="1.2" fill="#fff9d8" />
+						<circle cx="300" cy="20" r="2" fill="#fff" />
+						<circle cx="520" cy="110" r="1.5" fill="#ffe" />
+					</svg>
+				</figure>
 			</section>
 
 			<section id="projects">
-				<h3>Projects</h3>
-				<div class="grid">
-					<article class="card">
-						<h4>Startup Case Study</h4>
-						<p>Brief description of a project or class case competition. Add links to demos or repos.</p>
-					</article>
-					<article class="card">
-						<h4>Product Prototype</h4>
-						<p>Short note about a prototype built for a course or hackathon.</p>
-					</article>
-					<article class="card">
-						<h4>Research</h4>
-						<p>Any research, publications, or reports you want to highlight.</p>
-					</article>
-				</div>
+				<h3>Projects & Notes</h3>
+				<p>Project entries can go here. Because this page contains no CSS, the layout will be linear and simple — which keeps the focus on content and the star imagery above.</p>
 			</section>
 
 			<section id="contact">
 				<h3>Contact</h3>
-				<p>If you want to connect, email <a href="mailto:snibber1@babson.edu">snibber1@babson.edu</a> or <a href="https://www.linkedin.com/in/sumairnibber/">LinkedIn</a>.</p>
+				<p>If you'd like to connect, email <a href="mailto:snibber1@babson.edu">snibber1@babson.edu</a> or visit <a href="https://www.linkedin.com/in/sumairnibber/">LinkedIn</a>.</p>
 			</section>
 		</main>
 
-		<footer class="site-footer">
-			<div class="container">
-				<small>Built by a Babson student — customize this portfolio.</small>
-			</div>
+		<footer>
+			<small>Galaxy Journey — simple HTML with embedded SVG artwork.</small>
 		</footer>
 
 		<script>
-			const input = document.getElementById('name-input');
-			const saveBtn = document.getElementById('save-name');
-			const clearBtn = document.getElementById('clear-name');
-			const greeting = document.getElementById('greeting');
+			// Keep the simple personalization script (no CSS required)
+			(function(){
+				var input = document.getElementById('name-input');
+				var saveBtn = document.getElementById('save-name');
+				var clearBtn = document.getElementById('clear-name');
+				var greeting = document.getElementById('greeting');
 
-			function setGreeting(name) {
-				if (name) {
-					greeting.textContent = `Welcome, ${name}!`;
-					document.getElementById('site-name').textContent = name;
-				} else {
-					greeting.textContent = 'Hello — welcome!';
-					document.getElementById('site-name').textContent = 'Babson Student';
+				function setGreeting(name) {
+					var site = document.getElementById('site-name');
+					if (greeting) {
+						greeting.textContent = name ? ('Welcome, ' + name + '!') : 'Hello — welcome!';
+					}
+					if (site) site.textContent = name ? name : 'Galaxy Traveler';
 				}
-			}
 
-			saveBtn.addEventListener('click', () => {
-				const name = input.value.trim();
-				if (!name) return;
-				localStorage.setItem('profileName', name);
-				setGreeting(name);
-			});
+				// Attach handlers only if elements exist (page is CSS-free, inputs may be absent)
+				if (saveBtn && input) {
+					saveBtn.addEventListener('click', function(){
+						var name = input.value && input.value.trim();
+						if (!name) return;
+						localStorage.setItem('profileName', name);
+						setGreeting(name);
+					});
+				}
+				if (clearBtn) {
+					clearBtn.addEventListener('click', function(){
+						localStorage.removeItem('profileName');
+						if (input) input.value = '';
+						setGreeting(null);
+					});
+				}
 
-			clearBtn.addEventListener('click', () => {
-				localStorage.removeItem('profileName');
-				input.value = '';
-				setGreeting(null);
-			});
-
-			// Initialize
-			setGreeting(localStorage.getItem('profileName'));
+				setGreeting(localStorage.getItem('profileName'));
+			})();
 		</script>
 	</body>
 </html>
