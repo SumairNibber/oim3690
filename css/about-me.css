@@ -1,0 +1,151 @@
+/* Let's Go Cuisine — About Me styles
+	 Dark green & white color scheme, simple responsive layout.
+
+	 Recommended HTML structure (example):
+	 <header class="about-header">
+		 <div class="container profile">
+			 <div class="avatar">SN</div>
+			 <div>
+				 <h1 class="name">Sumair Nibber</h1>
+				 <p class="role">Undergraduate at Babson College — entrepreneurship, product, design</p>
+				 <nav class="nav">
+					 <ul>
+						 <li><a href="/">Home</a></li>
+						 <li><a href="recipes.html">Recipes</a></li>
+						 <li><a href="contact.html">Contact</a></li>
+					 </ul>
+				 </nav>
+			 </div>
+		 </div>
+	 </header>
+
+	 Use these class names in your HTML to get the layout below.
+*/
+
+:root{
+	--bg: #08291d;        /* very dark green */
+	--panel: #0e3b28;     /* slightly lighter panel */
+	--accent: #2aa373;    /* accent/links */
+	--muted: #dfeee6;     /* off-white text */
+	--white: #ffffff;
+}
+
+/* Page basics */
+html,body{height:100%;}
+body{
+	margin:0;
+	font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+	background: var(--bg);
+	color: var(--muted);
+	-webkit-font-smoothing:antialiased;
+	-moz-osx-font-smoothing:grayscale;
+}
+
+/* Center content area */
+.container{
+	max-width: 960px;
+	margin: 2rem auto;
+	padding: 1rem;
+}
+
+/* About header */
+.about-header .profile{
+	display:flex;
+	gap:1rem;
+	align-items:center;
+	background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.02));
+	padding: 1rem;
+	border-radius: 10px;
+}
+
+.avatar{
+	width:84px;
+	height:84px;
+	border-radius:50%;
+	display:inline-flex;
+	align-items:center;
+	justify-content:center;
+	font-weight:700;
+	color:var(--white);
+	background: linear-gradient(135deg, var(--accent), #1f7a58);
+	flex:0 0 84px;
+	font-size:1.2rem;
+}
+
+.name{
+	margin:0 0 0.125rem 0;
+	color:var(--white);
+	font-size:1.35rem;
+}
+
+.role{
+	margin:0 0 0.5rem 0;
+	color:var(--muted);
+	font-size:0.98rem;
+}
+
+/* Navigation: horizontal list */
+.nav ul{
+	list-style:none;
+	margin:0;
+	padding:0;
+	display:flex;
+	gap:0.5rem;
+	align-items:center;
+}
+
+.nav a{
+	color:var(--white);
+	text-decoration:none;
+	padding:0.4rem 0.7rem;
+	border-radius:6px;
+	background: transparent;
+	transition: background 120ms ease, transform 120ms ease;
+	font-size:0.95rem;
+}
+
+.nav a:hover,
+.nav a:focus{
+	background: rgba(255,255,255,0.04);
+	transform: translateY(-1px);
+	outline: none;
+}
+
+/* Small details */
+.about-card{
+	background: var(--panel);
+	padding:1rem;
+	border-radius:8px;
+	box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+}
+
+.contact{
+	margin-top:0.75rem;
+	font-size:0.9rem;
+	color:var(--muted);
+}
+
+/* Tables (if you add one) — subtle, readable */
+table{
+	width:100%;
+	border-collapse:collapse;
+	margin-top:1rem;
+}
+th,td{
+	text-align:left;
+	padding:0.5rem 0.6rem;
+	border-bottom:1px solid rgba(255,255,255,0.04);
+}
+
+/* Responsive adjustments */
+@media (max-width:640px){
+	.about-header .profile{flex-direction:column; align-items:flex-start}
+	.nav ul{flex-direction:row; flex-wrap:wrap; gap:0.4rem}
+}
+
+/* Small utility classes */
+.muted{color:rgba(255,255,255,0.75)}
+.accent{color:var(--accent)}
+
+/* End of stylesheet */
+
