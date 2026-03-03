@@ -1,0 +1,60 @@
+/* projects.css
+	 - Google Font import
+	 - Padding/margin examples and box model readiness
+	 - Border examples: solid, dashed, dotted
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+
+:root {
+  --celtics-green: #007A33;
+  --color-accent:  #ed8936;
+  --color-bg:      #ffffff;
+  --color-surface: #f7fafc;
+  --color-text:    #1a202c;
+  --color-muted:   #718096;
+
+  --gap:       1.5rem;
+  --radius:    8px;
+  --transition: 200ms ease;
+}
+
+/* Base page styles */
+*{box-sizing: border-box}
+body{
+	margin: 1rem;
+	font-family: 'Roboto', system-ui, -apple-system, 'Segoe UI', Roboto, Arial;
+	background: #f6f8fa;
+	color: #111;
+}
+
+/* Headings spacing to show margins */
+h1{ margin: 0 0 0.5rem 0; }
+h2{ margin: 0 0 0.35rem 0; font-weight:700 }
+
+/* Apply padding, margin and a white panel look to project sections.
+	 This targets plain <div> project blocks and also a `.project` class.
+*/
+body > div,
+.project{
+	background: var(--celtics-green);
+	padding: 1rem;          /* inner spacing */
+	margin: 1rem 0;         /* space between sections */
+	border-radius: 8px;
+	box-shadow: 0 2px 6px rgba(17,17,17,0.06);
+}
+
+/* Default solid border example */
+.project{ border: 3px solid #2a9d8f; }
+
+/* Alternative border styles you can toggle on elements: */
+.project.dashed{ border-style: dashed; border-color: #e76f51; }
+.project.dotted{ border-style: dotted; border-color: #264653; }
+
+/* Small utilities to highlight padding/margin visually for learning */
+.box-visual{ background: rgba(42,163,115,0.06); border: 1px dashed rgba(42,163,115,0.25) }
+
+/* Make paragraphs inside project blocks readable */
+.project p, body > div p{ margin: 0.5rem 0 0 0 }
+
+/* End of file */

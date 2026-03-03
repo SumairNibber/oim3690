@@ -1,0 +1,9 @@
+.my-element {
+  background-color: #eee;
+  transition: background-color 0.3s;
+}
+
+.my-element:hover {
+  background-color: #3b82f6;
+  color: white;
+}
