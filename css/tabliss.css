@@ -1,0 +1,63 @@
+/* tabliss.css — background for s12-demo.html */
+body {
+  background-image: url('../background.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  margin: 0;
+}
+
+.container {
+  display:flex;
+  flex-direction: column;
+  align-items:center;
+  justify-content:center;
+  height:100vh;
+  color: #fff;
+  font-weight: bold;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.6);
+}
+
+#time { font-size: 3rem; }
+#time {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+/* Boxes under the time */
+.boxes {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  margin-top: 0.5rem;
+}
+
+.box {
+  background: rgba(0,0,0,0.35);
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  min-width: 110px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
+}
+
+.box a {
+  color: inherit;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.box i { font-size: 1.25rem; }
+.box .label { font-size: 1rem; margin-top: 0.25rem; }
+
+.box:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 24px rgba(0,0,0,0.45);
+  background: rgba(0,0,0,0.5);
+}
