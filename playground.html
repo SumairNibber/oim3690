@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Playground</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ctext y='50' font-size='48'%3E%F0%9F%8E%A8%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+  <h1>My HTML Playground</h1>
+  <p>This page practices a few different HTML elements.</p>
+
+  <section>
+    <h2>YouTube Video</h2>
+    <p>Here is an embedded YouTube video:</p>
+    <iframe
+      width="560"
+      height="315"
+      src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+      title="YouTube video player"
+      allowfullscreen>
+    </iframe>
+  </section>
+
+  <section>
+    <h2>Google Map</h2>
+    <p>Here is a Google Map of Babson College:</p>
+    <iframe
+      src="https://www.google.com/maps?q=Babson+College&output=embed"
+      width="600"
+      height="450"
+      allowfullscreen
+      loading="lazy">
+    </iframe>
+  </section>
+
+  <section>
+    <h2>Audio and Video</h2>
+    <p>This audio player uses a sample MP3 file:</p>
+    <audio controls>
+      <source src="https://www.w3schools.com/html/horse.mp3" type="audio/mpeg">
+      Your browser does not support the audio element.
+    </audio>
+
+    <p>This video player uses a sample MP4 file:</p>
+    <video controls width="400">
+      <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </section>
+
+  <section>
+    <h2>FAQ</h2>
+    <details>
+      <summary>What is this page for?</summary>
+      <p>This page is for practicing new HTML tags.</p>
+    </details>
+
+    <details>
+      <summary>What does the iframe tag do?</summary>
+      <p>The iframe tag lets you embed another webpage or video inside your page.</p>
+    </details>
+
+    <details>
+      <summary>What does the canvas tag do?</summary>
+      <p>The canvas tag gives you a space where JavaScript can draw shapes and pictures.</p>
+    </details>
+  </section>
+
+  <section>
+    <h2>Canvas Drawing</h2>
+    <p>The picture below is drawn with the canvas element.</p>
+    <canvas id="myCanvas" width="400" height="220"></canvas>
+  </section>
+
+  <script>
+    const canvas = document.getElementById("myCanvas");
+    const ctx = canvas.getContext("2d");
+
+    ctx.fillStyle = "#87ceeb";
+    ctx.fillRect(0, 0, 400, 220);
+
+    ctx.fillStyle = "#f4d35e";
+    ctx.beginPath();
+    ctx.arc(60, 60, 30, 0, Math.PI * 2);
+    ctx.fill();
+
+    ctx.fillStyle = "#4caf50";
+    ctx.fillRect(0, 170, 400, 50);
+
+    ctx.fillStyle = "#8b5a2b";
+    ctx.fillRect(180, 90, 40, 80);
+
+    ctx.fillStyle = "#2e8b57";
+    ctx.beginPath();
+    ctx.arc(200, 80, 50, 0, Math.PI * 2);
+    ctx.fill();
+  </script>
+</body>
+</html>
