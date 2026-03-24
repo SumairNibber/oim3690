@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact</title>
+</head>
+<body>
+  <header>
+    <h1>Contact Me</h1>
+    <p>This page uses a simple contact form with basic HTML form elements.</p>
+  </header>
+
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="about-me.html">About Me</a>
+    <a href="projects.html">Projects</a>
+    <a href="interests.html">Interests</a>
+  </nav>
+
+  <main>
+    <section>
+      <h2>Send a Message</h2>
+
+      <form action="#" method="get">
+        <p>
+          <label for="name">Name:</label><br>
+          <input type="text" id="name" name="name" placeholder="Enter your name">
+        </p>
+
+        <p>
+          <label for="email">Email:</label><br>
+          <input type="email" id="email" name="email" placeholder="Enter your email">
+        </p>
+
+        <p>
+          <label for="topic">Topic:</label><br>
+          <select id="topic" name="topic">
+            <option value="">Choose one</option>
+            <option value="school">School</option>
+            <option value="project">Project</option>
+            <option value="general">General Question</option>
+          </select>
+        </p>
+
+        <p>
+          <label for="message">Message:</label><br>
+          <textarea id="message" name="message" rows="6" cols="40" placeholder="Write your message here"></textarea>
+        </p>
+
+        <p>
+          <button type="submit">Send</button>
+          <button type="reset">Clear</button>
+        </p>
+      </form>
+    </section>
+
+    <section>
+      <h2>Other Ways to Reach Me</h2>
+      <p>Email: <a href="mailto:snibber1@babson.edu">snibber1@babson.edu</a></p>
+    </section>
+  </main>
+</body>
+</html>

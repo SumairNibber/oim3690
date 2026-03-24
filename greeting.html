@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Greeting Page</title>
+</head>
+<body>
+  <h1>Simple Greeting Page</h1>
+  <p>This page uses a small JavaScript function and a button click.</p>
+
+  <p>
+    <label for="userName">Your name:</label><br>
+    <input type="text" id="userName" placeholder="Type your name">
+  </p>
+
+  <p>
+    <button id="greetButton">Show Greeting</button>
+  </p>
+
+  <h2 id="message">Your greeting will appear here.</h2>
+
+  <script>
+    let button = document.getElementById("greetButton");
+    let nameInput = document.getElementById("userName");
+    let message = document.getElementById("message");
+
+    function showGreeting() {
+      let name = nameInput.value;
+
+      if (name === "") {
+        message.textContent = "Hello!";
+      } else {
+        message.textContent = "Hello, " + name + "!";
+      }
+    }
+
+    button.addEventListener("click", showGreeting);
+  </script>
+</body>
+</html>
