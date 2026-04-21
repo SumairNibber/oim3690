@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Score Analyzer</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 24px;
+      line-height: 1.5;
+    }
+
+    button {
+      font-size: 1rem;
+      padding: 8px 14px;
+      cursor: pointer;
+    }
+
+    #summary {
+      margin-top: 18px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Quiz Score Analyzer</h1>
+  <p>This page uses an array, a loop, and a few simple calculations.</p>
+
+  <button id="analyzeButton">Analyze Scores</button>
+
+  <div id="summary"></div>
+  <h2>Scores</h2>
+  <ul id="scoreList"></ul>
+
+  <script>
+    const scores = [88, 72, 95, 63, 81, 56, 90];
+
+    const analyzeButton = document.querySelector("#analyzeButton");
+    const summary = document.querySelector("#summary");
+    const scoreList = document.querySelector("#scoreList");
+
+    function getGrade(score) {
+      if (score >= 90) {
+        return "A";
+      } else if (score >= 80) {
+        return "B";
+      } else if (score >= 70) {
+        return "C";
+      } else if (score >= 60) {
+        return "D";
+      } else {
+        return "F";
+      }
+    }
+
+    function analyzeScores() {
+      let total = 0;
+      let highest = scores[0];
+      let lowest = scores[0];
+      let passingCount = 0;
+
+      scoreList.innerHTML = "";
+
+      for (let i = 0; i < scores.length; i++) {
+        const score = scores[i];
+        total = total + score;
+
+        if (score > highest) {
+          highest = score;
+        }
+
+        if (score < lowest) {
+          lowest = score;
+        }
+
+        if (score >= 60) {
+          passingCount++;
+        }
+
+        const li = document.createElement("li");
+        li.textContent = `${score} - ${getGrade(score)}`;
+        scoreList.appendChild(li);
+      }
+
+      const average = total / scores.length;
+
+      summary.innerHTML = `
+        <p>Total number of scores: ${scores.length}</p>
+        <p>Average score: ${average.toFixed(1)}</p>
+        <p>Highest score: ${highest}</p>
+        <p>Lowest score: ${lowest}</p>
+        <p>Passing scores: ${passingCount}</p>
+      `;
+    }
+
+    analyzeButton.addEventListener("click", analyzeScores);
+    analyzeScores();
+  </script>
+</body>
+</html>

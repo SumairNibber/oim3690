@@ -4,14 +4,34 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Greeting Page</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 24px;
+      line-height: 1.5;
+    }
+
+    input,
+    button {
+      font-size: 1rem;
+      padding: 8px;
+      margin-top: 8px;
+    }
+
+    button {
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
-  <h1>Simple Greeting Page</h1>
-  <p>This page uses a small JavaScript function and a button click.</p>
+  <h1>Greeting Page</h1>
+  <p>Type your name and click the button to see a greeting.</p>
 
   <p>
-    <label for="userName">Your name:</label><br>
-    <input type="text" id="userName" placeholder="Type your name">
+    <label for="nameInput">Your name:</label><br>
+    <input type="text" id="nameInput" placeholder="Type your name">
   </p>
 
   <p>
@@ -21,21 +41,21 @@
   <h2 id="message">Your greeting will appear here.</h2>
 
   <script>
-    let button = document.getElementById("greetButton");
-    let nameInput = document.getElementById("userName");
-    let message = document.getElementById("message");
+    const greetButton = document.querySelector("#greetButton");
+    const nameInput = document.querySelector("#nameInput");
+    const message = document.querySelector("#message");
 
     function showGreeting() {
-      let name = nameInput.value;
+      const name = nameInput.value.trim();
 
       if (name === "") {
         message.textContent = "Hello!";
       } else {
-        message.textContent = "Hello, " + name + "!";
+        message.textContent = `Hello, ${name}!`;
       }
     }
 
-    button.addEventListener("click", showGreeting);
+    greetButton.addEventListener("click", showGreeting);
   </script>
 </body>
 </html>

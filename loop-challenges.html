@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Loop Challenges</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 24px;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+  <h1>Loop Challenges</h1>
+  <p>This page uses loops to solve a few basic array problems.</p>
+
+  <h2>Number List</h2>
+  <ul id="numberList"></ul>
+
+  <h2>Results</h2>
+  <p id="sumResult"></p>
+  <p id="maxResult"></p>
+  <p id="positiveResult"></p>
+  <p id="evenResult"></p>
+
+  <script>
+    const numbers = [4, -8, 15, -16, 23, 42, -3];
+
+    const numberList = document.querySelector("#numberList");
+    const sumResult = document.querySelector("#sumResult");
+    const maxResult = document.querySelector("#maxResult");
+    const positiveResult = document.querySelector("#positiveResult");
+    const evenResult = document.querySelector("#evenResult");
+
+    function buildResults() {
+      let sum = 0;
+      let max = numbers[0];
+      let positiveCount = 0;
+      const evenNumbers = [];
+
+      numberList.innerHTML = "";
+
+      for (let i = 0; i < numbers.length; i++) {
+        const number = numbers[i];
+
+        const li = document.createElement("li");
+        li.textContent = number;
+        numberList.appendChild(li);
+
+        sum = sum + number;
+
+        if (number > max) {
+          max = number;
+        }
+
+        if (number > 0) {
+          positiveCount++;
+        }
+
+        if (number % 2 === 0) {
+          evenNumbers.push(number);
+        }
+      }
+
+      sumResult.textContent = `Sum: ${sum}`;
+      maxResult.textContent = `Largest number: ${max}`;
+      positiveResult.textContent = `Positive numbers: ${positiveCount}`;
+      evenResult.textContent = `Even numbers: ${evenNumbers.join(", ")}`;
+    }
+
+    buildResults();
+  </script>
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tip Calculator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 24px;
+      line-height: 1.5;
+    }
+
+    label,
+    input,
+    button {
+      display: block;
+      margin-top: 10px;
+      font-size: 1rem;
+    }
+
+    input,
+    button {
+      padding: 8px;
+      width: 100%;
+      max-width: 320px;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    #result {
+      margin-top: 18px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>Tip Calculator</h1>
+  <p>Enter a bill amount and tip percentage, then click the button.</p>
+
+  <label for="billInput">Bill Amount</label>
+  <input id="billInput" type="number" min="0" step="0.01" placeholder="50">
+
+  <label for="tipInput">Tip Percentage</label>
+  <input id="tipInput" type="number" min="0" step="1" placeholder="20">
+
+  <button id="calculateButton">Calculate Tip</button>
+
+  <p id="result">Your tip and total will appear here.</p>
+
+  <script>
+    const billInput = document.querySelector("#billInput");
+    const tipInput = document.querySelector("#tipInput");
+    const calculateButton = document.querySelector("#calculateButton");
+    const result = document.querySelector("#result");
+
+    function calculateTip(billAmount, tipPercent) {
+      const tip = billAmount * (tipPercent / 100);
+      const total = billAmount + tip;
+
+      return {
+        tip: tip,
+        total: total
+      };
+    }
+
+    function showTip() {
+      if (billInput.value === "" || tipInput.value === "") {
+        result.textContent = "Please enter both numbers first.";
+        return;
+      }
+
+      const billAmount = Number(billInput.value);
+      const tipPercent = Number(tipInput.value);
+
+      if (billAmount < 0 || tipPercent < 0) {
+        result.textContent = "Numbers cannot be negative.";
+        return;
+      }
+
+      const totals = calculateTip(billAmount, tipPercent);
+
+      result.textContent = `Tip: $${totals.tip.toFixed(2)} | Total: $${totals.total.toFixed(2)}`;
+    }
+
+    calculateButton.addEventListener("click", showTip);
+  </script>
+</body>
+</html>

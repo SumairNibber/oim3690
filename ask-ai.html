@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ask AI</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 24px;
+      line-height: 1.5;
+    }
+
+    textarea,
+    button {
+      width: 100%;
+      max-width: 700px;
+      font-size: 1rem;
+      padding: 8px;
+      margin-top: 8px;
+    }
+
+    textarea {
+      min-height: 140px;
+    }
+
+    button {
+      max-width: 220px;
+      cursor: pointer;
+    }
+
+    #responseOutput {
+      white-space: pre-wrap;
+      border: 1px solid #ccc;
+      padding: 16px;
+      margin-top: 16px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Ask AI</h1>
+  <p>This is a classroom demo. Real apps should keep API keys on a server instead of in browser code.</p>
+
+  <label for="promptInput">Prompt</label>
+  <textarea id="promptInput" placeholder="Ask a question here"></textarea>
+
+  <button id="askButton">Send Prompt</button>
+
+  <p id="status"></p>
+  <p id="responseOutput">The response will appear here.</p>
+
+  <script src="config.js"></script>
+  <script>
+    const promptInput = document.querySelector("#promptInput");
+    const askButton = document.querySelector("#askButton");
+    const status = document.querySelector("#status");
+    const responseOutput = document.querySelector("#responseOutput");
+
+    function getResponseText(data) {
+      if (data.output_text) {
+        return data.output_text.trim();
+      }
+
+      if (!data.output) {
+        return "";
+      }
+
+      let text = "";
+
+      for (let i = 0; i < data.output.length; i++) {
+        const outputItem = data.output[i];
+
+        if (!outputItem.content) {
+          continue;
+        }
+
+        for (let j = 0; j < outputItem.content.length; j++) {
+          const contentItem = outputItem.content[j];
+
+          if (typeof contentItem.text === "string") {
+            text = text + contentItem.text;
+          }
+        }
+      }
+
+      return text.trim();
+    }
+
+    async function askAI() {
+      const prompt = promptInput.value.trim();
+      const apiKey = window.CONFIG && window.CONFIG.OPENAI_API_KEY;
+
+      if (prompt === "") {
+        status.textContent = "Please enter a prompt first.";
+        return;
+      }
+
+      if (!apiKey) {
+        status.textContent = "Add your OpenAI API key to config.js first.";
+        return;
+      }
+
+      status.textContent = "Loading...";
+      responseOutput.textContent = "";
+
+      try {
+        const response = await fetch("https://api.openai.com/v1/responses", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${apiKey}`
+          },
+          body: JSON.stringify({
+            model: "gpt-5.4-mini",
+            input: prompt
+          })
+        });
+
+        if (!response.ok) {
+          throw new Error("Could not get a response from OpenAI.");
+        }
+
+        const data = await response.json();
+        const text = getResponseText(data);
+
+        responseOutput.textContent = text || "No text was returned.";
+        status.textContent = "";
+      } catch (error) {
+        status.textContent = error.message;
+      }
+    }
+
+    askButton.addEventListener("click", askAI);
+  </script>
+</body>
+</html>

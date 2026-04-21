@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MA Town Explorer</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 24px;
+      line-height: 1.5;
+    }
+
+    input {
+      font-size: 1rem;
+      padding: 8px;
+      width: 100%;
+      max-width: 320px;
+    }
+  </style>
+</head>
+<body>
+  <h1>MA Town Explorer</h1>
+  <p>Search Massachusetts towns from the class API.</p>
+
+  <label for="searchInput">Search by town name</label>
+  <input id="searchInput" type="text" placeholder="Type a town name">
+
+  <p id="status">Loading towns...</p>
+  <p id="largestTown"></p>
+  <ul id="townList"></ul>
+
+  <script>
+    const searchInput = document.querySelector("#searchInput");
+    const status = document.querySelector("#status");
+    const largestTown = document.querySelector("#largestTown");
+    const townList = document.querySelector("#townList");
+
+    let towns = [];
+
+    function showTowns(list) {
+      townList.innerHTML = "";
+
+      for (let i = 0; i < list.length; i++) {
+        const town = list[i];
+        const li = document.createElement("li");
+        li.textContent = `${town.name} - ${town.county} County - Population ${town.population.toLocaleString()}`;
+        townList.appendChild(li);
+      }
+    }
+
+    function findLargestTown() {
+      let biggest = towns[0];
+
+      for (let i = 1; i < towns.length; i++) {
+        if (towns[i].population > biggest.population) {
+          biggest = towns[i];
+        }
+      }
+
+      largestTown.textContent = `Largest population: ${biggest.name} (${biggest.population.toLocaleString()})`;
+    }
+
+    function filterTowns() {
+      const searchText = searchInput.value.trim().toLowerCase();
+      const matches = [];
+
+      for (let i = 0; i < towns.length; i++) {
+        const town = towns[i];
+
+        if (town.name.toLowerCase().includes(searchText)) {
+          matches.push(town);
+        }
+      }
+
+      status.textContent = `Matches: ${matches.length}`;
+      showTowns(matches.slice(0, 10));
+    }
+
+    async function loadTowns() {
+      try {
+        const response = await fetch("https://oim.108122.xyz/mass");
+
+        if (!response.ok) {
+          throw new Error("Could not load town data.");
+        }
+
+        const data = await response.json();
+        towns = data.data;
+
+        status.textContent = `Loaded ${towns.length} towns. Showing the first 10.`;
+        showTowns(towns.slice(0, 10));
+        findLargestTown();
+      } catch (error) {
+        status.textContent = error.message;
+      }
+    }
+
+    searchInput.addEventListener("input", filterTowns);
+    loadTowns();
+  </script>
+</body>
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Class Message Board</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 24px;
+      line-height: 1.5;
+    }
+
+    input,
+    textarea,
+    button {
+      width: 100%;
+      max-width: 500px;
+      font-size: 1rem;
+      padding: 8px;
+      margin-top: 8px;
+    }
+
+    textarea {
+      min-height: 120px;
+    }
+
+    button {
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>Class Message Board</h1>
+  <p>Load the current messages and post a new one.</p>
+
+  <label for="authorInput">First Name</label>
+  <input id="authorInput" type="text" placeholder="Alice">
+
+  <label for="messageInput">Message</label>
+  <textarea id="messageInput" placeholder="Write a short message"></textarea>
+
+  <button id="postButton">Post Message</button>
+
+  <p id="status">Loading messages...</p>
+  <ul id="messageList"></ul>
+
+  <script>
+    const authorInput = document.querySelector("#authorInput");
+    const messageInput = document.querySelector("#messageInput");
+    const postButton = document.querySelector("#postButton");
+    const status = document.querySelector("#status");
+    const messageList = document.querySelector("#messageList");
+
+    function showMessages(messages) {
+      messageList.innerHTML = "";
+
+      for (let i = 0; i < messages.length; i++) {
+        const message = messages[i];
+        const li = document.createElement("li");
+        li.textContent = `${message.author}: ${message.message}`;
+        messageList.appendChild(li);
+      }
+    }
+
+    async function loadMessages() {
+      status.textContent = "Loading messages...";
+
+      try {
+        const response = await fetch("https://oim.108122.xyz/messages");
+
+        if (!response.ok) {
+          throw new Error("Could not load messages.");
+        }
+
+        const messages = await response.json();
+        showMessages(messages);
+        status.textContent = `Messages loaded: ${messages.length}`;
+      } catch (error) {
+        status.textContent = error.message;
+      }
+    }
+
+    async function postMessage() {
+      const author = authorInput.value.trim();
+      const message = messageInput.value.trim();
+
+      if (author === "" || message === "") {
+        status.textContent = "Please enter your name and a message.";
+        return;
+      }
+
+      const token = `${author.toLowerCase()}${author.toLowerCase()}`;
+
+      status.textContent = "Posting message...";
+
+      try {
+        const response = await fetch("https://oim.108122.xyz/message", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "X-Token": token
+          },
+          body: JSON.stringify({
+            author: author,
+            message: message
+          })
+        });
+
+        if (!response.ok) {
+          throw new Error("Could not post your message.");
+        }
+
+        messageInput.value = "";
+        status.textContent = "Message posted.";
+        loadMessages();
+      } catch (error) {
+        status.textContent = error.message;
+      }
+    }
+
+    postButton.addEventListener("click", postMessage);
+    loadMessages();
+  </script>
+</body>
+</html>
